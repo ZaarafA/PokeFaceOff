@@ -132,11 +132,7 @@ body {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1rem;
-    color: white;
-}
-
-.pkmnMeasure {
+    font-size: 
     display: flex;
     justify-content: space-between;
 }
@@ -153,21 +149,23 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .imgBg img {
-    max-width: 100%; 
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    image-rendering: pixelated;
     border-radius: 50%;
 }
+
 
 .buttonPanel {
     display: flex;
     justify-content: center;
     padding: 10px 0px;
 }
-
 .buttonPanel button {
     background-color: #32CC19;
     border: solid var(--medblue) 2px;
@@ -177,6 +175,11 @@ body {
     border-radius: 20px;
     font-family: 'PixelFont';
     padding: 5px;
+    transition: all 0.3s ease-in-out;
+}
+.buttonPanel button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .YourStats {
