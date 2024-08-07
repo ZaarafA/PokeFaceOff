@@ -23,12 +23,12 @@
     --spdef: #7A3CFF;
     --speed: #3DD6F8;
 
-    --atkbase: #6b6b6b;
-    --hpbase: #6b6b6b;
-    --defbase: #6b6b6b;
-    --spatkbase: #6b6b6b;
-    --spdefbase: #6b6b6b;
-    --spebase: #6b6b6b;
+    --atkbase: #662343;
+    --hpbase: #14754D;
+    --defbase: #66795F;
+    --spatkbase: #603EA9;
+    --spdefbase: #313BA9;
+    --spebase: #1879A6;
 }
 
 body {
@@ -42,13 +42,14 @@ body {
 
 .container {
     background-color: var(--blue);
-    height: 96vh;
+    height: 60vh;
     margin: 0px 15px;
+    margin-bottom: 100px;
 }
 
 .header {
     background-color: var(--medblue);
-    height: 9%;
+    height: 12%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,29 +61,30 @@ body {
 
 .centerPanel {
     display: flex;
-    height: 91vh;
+    height: 88vh;
     width: 100%;
+    background-color: var(--blue);
 }
 
 .mainPanel {
-    background-color: #FFD645;
     width: 80vw;
+    padding: 10px;
 }
 
 .question {
-    font-size: 1.3rem;
-    background-color: #3DD6F8;
-    height: inherit;
-    padding: 25px 0px;
+    font-size: 1.6rem;
+    height: 10vh;
+    padding: 5px 0px;
     text-align: center;
     letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .heroPanel {
     display: flex;
-    justify-content: center;
-    height: 65vh;
-    background-color: green;
+    height: 55vh;
 }
 
 .spriteArea {
@@ -95,11 +97,9 @@ body {
 
 .pkmnStats {
     width: 60%;
-    background-color: #FFD645;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px 40px;
 }
 
 .pkmnStat {
@@ -118,11 +118,22 @@ body {
     border-radius: 40px;
     flex-grow: 0.75;
     height: 25px;
+    position: relative;
 }
+
 .statBlockBar {
     border-radius: 40px;
     height: 100%;
     width: 50%;
+}
+
+.statNumber {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: white;
 }
 
 .pkmnMeasure {
@@ -136,8 +147,8 @@ body {
 
 .imgBg {
     background-color: #003266;
-    width: 20vw;
-    height: 20vw;
+    width: 23vw;
+    height: 23vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,7 +163,6 @@ body {
 }
 
 .buttonPanel {
-    background-color: #3DD6F8;
     display: flex;
     justify-content: center;
     padding: 10px 0px;
@@ -166,10 +176,11 @@ body {
     margin: 10px;
     border-radius: 20px;
     font-family: 'PixelFont';
+    padding: 5px;
 }
 
 .YourStats {
-    background-color: #EF45FE;
+    background-color: var(--medblue);
     width: 20vw;
     padding: 10px 20px;
     display: flex;
@@ -178,12 +189,11 @@ body {
 
 .yourStatsTitle {
     text-align: center;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .yourStats {
     width: 60%;
-    background-color: #FFD645;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -207,6 +217,7 @@ body {
     border-radius: 40px;
     flex-grow: 0.8;
     height: 20px;
+    position: relative;
 }
 .YourStats .statBlockBar {
     border-radius: 40px;
@@ -215,37 +226,31 @@ body {
 
 .atk {
     background-color: var(--atk);
-}
-.atkbase {
+}.atkbase {
     background-color: var(--atkbase);
 }
 .def {
     background-color: var(--def);
-}
-.defbase {
+}.defbase {
     background-color: var(--defbase);
 }
 .hp {
     background-color: var(--hp);
-}
-.hpbase {
+}.hpbase {
     background-color: var(--hpbase);
 }
 .spdef {
     background-color: var(--spdef);
-}
-.spdefbase {
+}.spdefbase {
     background-color: var(--spdefbase);
 }
 .spatk {
     background-color: var(--spatk);
-}
-.spatkbase {
+}.spatkbase {
     background-color: var(--spatkbase);
 }
 .spe {
     background-color: var(--speed);
-}
-.spebase {
+}.spebase {
     background-color: var(--spebase);
 }
