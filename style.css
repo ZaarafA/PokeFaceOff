@@ -1,8 +1,138 @@
-body{
-    background-color: #000c1f;
-    color: white;
+@font-face {
+    font-family: 'PixelFont';
+    src: url('PokemonGb.ttf') format('truetype'),;
+    font-weight: normal;
+    font-style: normal;
 }
-.container{
+
+:root {
+    --medblue: #001D49;
+    --blue: #003A70;
+    --red: #ff0000;
+    --hp: #32CC19;
+    --atk: #FF0000;
+    --def: #FFD645;
+    --spatk: #EF45FE;
+    --spdef: #7A3CFF;
+    --speed: #3DD6F8;
+}
+
+body {
+    background-color: var(--medblue);
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'PixelFont';
+}
+
+.container {
+    background-color: var(--blue);
+    height: 96vh;
+    margin: 0 5px;
+}
+
+.header {
+    background-color: var(--medblue);
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centerPanel {
+    display: flex;
+    height: 91vh;
+    width: 100%;
+}
+
+.mainPanel {
+    background-color: #FFD645;
+    width: 80vw;
+}
+
+.question {
+    font-size: 1.2rem;
+    background-color: #3DD6F8;
+    padding: 15px;
+    text-align: center;
+}
+
+.heroPanel {
+    display: flex;
+    justify-content: center;
+    height: 65vh;
+    background-color: green;
+}
+
+.spriteArea {
     padding: 10px;
-    background-color: #001D49;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pkmnStats {
+    width: 60%;
+    background-color: #FFD645;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.pkmnStat {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.pkmnStatTitle {
+    width: 20%;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+.statBlock {
+    border-radius: 40px;
+    flex-grow: 1;
+    height: 20px;
+    background-color: red;
+}
+
+.imgBg {
+    background-color: #003266;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.imgBg img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+}
+
+.buttonPanel {
+    background-color: #3DD6F8;
+    display: flex;
+    justify-content: center;
+}
+
+.buttonPanel button {
+    background-color: #32CC19;
+    border: solid green 1px;
+    padding: 12px 30px;
+    margin: 10px;
+    border-radius: 20px;
+    font-family: 'PixelFont';
+}
+
+.YourStats {
+    background-color: #EF45FE;
+    width: 20vw;
 }
