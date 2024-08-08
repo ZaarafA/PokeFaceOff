@@ -132,7 +132,11 @@ body {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 
+    font-size: 1rem;
+    color: white;
+}
+
+.pkmnMeasure {
     display: flex;
     justify-content: space-between;
 }
