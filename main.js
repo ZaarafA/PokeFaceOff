@@ -125,5 +125,18 @@ function calculate_stats(e){
 }
 
 function updateStats(){
-
+    // Replace Stats
+    document.querySelector("#user_hp_num").innerHTML = user_stats[0];
+    document.querySelector("#user_atk_num").innerHTML = user_stats[1];
+    document.querySelector("#user_def_num").innerHTML = user_stats[2];
+    document.querySelector("#user_spatk_num").innerHTML = user_stats[3];
+    document.querySelector("#user_spdef_num").innerHTML = user_stats[4];
+    document.querySelector("#user_spe_num").innerHTML = user_stats[5];
+    // Render Stat Bars
+    document.querySelector("#user_hp_bar").style = `width: ${(user_stats[0] / 200)*100}%`;
+    document.querySelector("#user_atk_bar").style.width = `${(user_stats[1] / 200)*100}%`;
+    document.querySelector("#user_def_bar").style.width = `${(user_stats[2] / 200)*100}%`;
+    document.querySelector("#user_spatk_bar").style.width = `${(user_stats[3] / 200)*100}%`;
+    document.querySelector("#user_spdef_bar").style.width = `${(user_stats[4] / 200)*100}%`;
+    document.querySelector("#user_spe_bar").style.width = `${(user_stats[5] / 200)*100}%`;
 }
