@@ -17,23 +17,22 @@ async function buttonClick(e){
 
 async function resetPokemon(){
     /*
-        Generate a random number
-        Fetch that Pokemon's data
         Load it into pokemon_data
-        Add id num into past_ids 
 
         Replace Sprite
         Change the Name in the title
         Change the numbers in the stats
     */
 
+    // Generate a random number
     let rand_id = Math.floor(Math.random() * 1025) + 1;
     
-    // Fetch Data
+    // Fetch Pokemon data
     await fetchPokemonData(rand_id);
+    past_ids.push(pokemon_data.id);
 
     // Replace Data
-    document.querySelector(".question").innerHTML = `Could you beat ${pokemon_data.name} in a fight?`;
+    document.querySelector(".question").innerHTML = `Could you beat ${pokemon_data.name.charAt(0).toUpperCase() + pokemon_data.name.slice(1)} in a fight?`;
     document.querySelector("#pkmn_img").src = pokemon_data.sprites.front_default;
     document.querySelector("#pkmn_height").innerHTML = `Height: ${(pokemon_data.height)/10}m`
     document.querySelector("#pkmn_weight").innerHTML = `Weight: ${(pokemon_data.weight)/10}kg`
