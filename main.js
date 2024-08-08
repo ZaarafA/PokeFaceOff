@@ -4,6 +4,7 @@ const buttons = document.querySelectorAll(".option");
 // Global
 let pokemon_data = {};
 let past_ids = [];
+let user_stats = [0,0,0,0,0,0]
 
 buttons.forEach(element => {
     element.addEventListener("click", e => {
@@ -12,8 +13,11 @@ buttons.forEach(element => {
 });
 
 async function buttonClick(e){
+    calculate_stats(e);
     await resetPokemon();
 }
+
+resetPokemon();
 
 async function resetPokemon(){
     /*
@@ -70,6 +74,56 @@ async function fetchPokemonData(id) {
     }
 }
 
-function calculate_stats(){
+function calculate_stats(e){
     // recalculate User Stats based on pokemon match up
+
+    /*
+    If you would beat a pokemon:
+    Its lowest defense increases your corresponding attack
+    The increase is the difference between your stats
+    only if greater than yours
+    Easy = the full difference
+    Probably = half diff
+    50/50 => 1/4 diff
+    subtract otherwise  
+    */
+
+    let selection = e.target.innerHTML;
+
+    const responseValues = {
+        "Easy": .5,
+        "Probably": .25,
+        "50/50": .125,
+        "Nope": -.25,
+        "im dead": -.5
+    };
+    
+
+    // hp calc
+    // get pokemon's higher attack stat
+    let pkmn_offense = [0,"stat"];
+    if(pokemon_data.stats[1].base_stat > pokemon_data.stats[3].base_stat){
+        pkmn_offense[0] = pokemon_data.stats[1].base_stat;
+        pkmn_offense[1] = "Attack";
+    } else {
+        pkmn_offense[0] = pokemon_data.stats[3].base_stat;
+        pkmn_offense[1] = "Sp. Atk";
+    }
+    // get user's higher stat
+
+    // get pokemon's defense
+    // get user's defense
+
+    // if EASY, PROBABLY, 50/50
+    if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
+        // HP += pkmnhp - userhp * EASY/PR/50
+        // user_stats[0] += ((pokemon_data.stats[0].base_stat - user_stats[0]) * responseValues[selection]);
+        // user_stats[0] = Math.round(user_stats[0]);
+    }
+
+    updateStats();
+}
+
+function updateStats(){
+
 }
