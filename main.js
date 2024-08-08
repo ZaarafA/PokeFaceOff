@@ -32,7 +32,25 @@ async function resetPokemon(){
     // Fetch Data
     await fetchPokemonData(rand_id);
 
-
+    // Replace Data
+    document.querySelector(".question").innerHTML = `Could you beat ${pokemon_data.name} in a fight?`;
+    document.querySelector("#pkmn_img").src = pokemon_data.sprites.front_default;
+    document.querySelector("#pkmn_height").innerHTML = `Height: ${(pokemon_data.height)/10}m`
+    document.querySelector("#pkmn_weight").innerHTML = `Weight: ${(pokemon_data.weight)/10}kg`
+    // Replace Stats
+    document.querySelector("#pkmn_hp_num").innerHTML = pokemon_data.stats[0].base_stat;
+    document.querySelector("#pkmn_atk_num").innerHTML = pokemon_data.stats[1].base_stat;
+    document.querySelector("#pkmn_def_num").innerHTML = pokemon_data.stats[2].base_stat;
+    document.querySelector("#pkmn_spatk_num").innerHTML = pokemon_data.stats[3].base_stat;
+    document.querySelector("#pkmn_spdef_num").innerHTML = pokemon_data.stats[4].base_stat;
+    document.querySelector("#pkmn_spe_num").innerHTML = pokemon_data.stats[5].base_stat;
+    // Render Stat Bars
+    document.querySelector("#pkmn_hp_bar").style = `width: ${(pokemon_data.stats[0].base_stat / 200)*100}%`;
+    document.querySelector("#pkmn_atk_bar").style.width = `${(pokemon_data.stats[1].base_stat / 200)*100}%`;
+    document.querySelector("#pkmn_def_bar").style.width = `${(pokemon_data.stats[2].base_stat / 200)*100}%`;
+    document.querySelector("#pkmn_spatk_bar").style.width = `${(pokemon_data.stats[3].base_stat / 200)*100}%`;
+    document.querySelector("#pkmn_spdef_bar").style.width = `${(pokemon_data.stats[4].base_stat / 200)*100}%`;
+    document.querySelector("#pkmn_spe_bar").style.width = `${(pokemon_data.stats[5].base_stat / 200)*100}%`;
 }
 
 async function fetchPokemonData(id) {
