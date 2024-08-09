@@ -97,9 +97,7 @@ function calculate_stats(e){
         "Nope": -.25,
         "im dead": -.5
     };
-    
 
-    // hp calc
     // get pokemon's higher attack stat
     let pkmn_offense = [0,"stat"];
     if(pokemon_data.stats[1].base_stat > pokemon_data.stats[3].base_stat){
@@ -109,17 +107,42 @@ function calculate_stats(e){
         pkmn_offense[0] = pokemon_data.stats[3].base_stat;
         pkmn_offense[1] = "Sp. Atk";
     }
-    // get user's higher stat
 
-    // get pokemon's defense
+    let pkmn_defense = [0,"stat"];
+    if(pokemon_data.stats[2].base_stat > pokemon_data.stats[4].base_stat){
+        pkmn_defense[0] = pokemon_data.stats[2].base_stat;
+        pkmn_defense[1] = "Defense";
+    } else {
+        pkmn_defense[0] = pokemon_data.stats[4].base_stat;
+        pkmn_defense[1] = "Sp. Def";
+    }
+
+    // get user's offense
     // get user's defense
 
     // if EASY, PROBABLY, 50/50
     if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
-        // HP += pkmnhp - userhp * EASY/PR/50
-        // user_stats[0] += ((pokemon_data.stats[0].base_stat - user_stats[0]) * responseValues[selection]);
-        // user_stats[0] = Math.round(user_stats[0]);
+        // hp -> if pkmn_offense > user_hp, hp += (pkmn_offense[0] - user_stats[0]) * responseValues[selection]
+        if(pkmn_offense[0] > user_stats[0]){
+            user_stats[0] += (pkmn_offense[0] - user_stats[0]) * responseValues[selection];
+            user_stats[0] = Math.round(user_stats[0]);
+        }
+
+        // pokemon offense raises that user's defense
+        if((pkmn_offense[1] == "Attack") && (pkmn_offense[0] > user_stats[2])){
+            user_stats[2] += (pkmn_offense[0] - user_stats[2]) * responseValues[selection]
+            user_stats[2] = Math.round(user_stats[2]);
+        } else if((pkmn_offense[1] == "Sp. Atk") && (pkmn_offense[0] > user_stats[4])){
+            user_stats[4] += (pkmn_offense[0] - user_stats[4]) * responseValues[selection];
+            user_stats[4] = Math.round(user_stats[4]);
+        }
+
+        // pokemon defense raises that offense
     }
+
+
+
+
 
     updateStats();
 }
