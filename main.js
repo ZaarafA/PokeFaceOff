@@ -89,6 +89,7 @@ function calculate_stats(e){
     */
 
     let selection = e.target.innerHTML;
+    let bst = user_stats.reduce(add, 0);
 
     const responseValues = {
         "Easy": .5,
@@ -99,6 +100,7 @@ function calculate_stats(e){
     };
 
     // get pokemon's higher attack stat
+    // TODO: make this a ternary
     let pkmn_offense = [0,"stat"];
     if(pokemon_data.stats[1].base_stat > pokemon_data.stats[3].base_stat){
         pkmn_offense[0] = pokemon_data.stats[1].base_stat;
@@ -118,6 +120,12 @@ function calculate_stats(e){
     }
 
     // get user's offense
+    let user_offense = [0,"stat"];
+    if(user_stats[1] > user_stats[3]){
+        user_offense = [user_stats[1], "Attack"]
+    } else{
+        user_offense = [user_stats[3], "Sp. Atk"]
+    }
     // get user's defense
 
     // if EASY, PROBABLY, 50/50
@@ -138,6 +146,26 @@ function calculate_stats(e){
         }
 
         // pokemon defense raises that offense
+        // PROBLEM: It will only every raise one attack stat
+        // if((user_offense[1] == "Attack") && (pokemon_data.stats[2].base_stat > user_offense[0])){
+        //     // raise user attack
+        //     user_stats[1] += (pokemon_data.stats[2].base_stat - user_stats[1]) * responseValues[selection]
+        //     user_stats[1] = Math.round(user_stats[1]);
+        // } else if((user_offense[1] == "Sp. Atk") && (pokemon_data.stats[4].base_stat > user_offense[0])){
+        //     // raise user sp. atk
+        //     user_stats[3] += (pokemon_data.stats[4].base_stat - user_stats[1]) * responseValues[selection]
+        //     user_stats[3] = Math.round(user_stats[3]);
+        // }
+
+        if((pkmn_defense[1] == "Defense") && (pkmn_defense[0] > user_stats[1])){
+            user_stats[1] += (pokemon_data.stats[2].base_stat - user_stats[1]) * responseValues[selection]
+            user_stats[1] = Math.round(user_stats[1]);
+        } else if((pkmn_defense[1] == "Sp. Def") && (pkmn_defense[0] > user_stats[3])){
+            user_stats[3] += (pokemon_data.stats[4].base_stat - user_stats[3]) * responseValues[selection]
+            user_stats[3] = Math.round(user_stats[3]);
+        }
+
+        // BST should be relative to 600
     }
 
 
