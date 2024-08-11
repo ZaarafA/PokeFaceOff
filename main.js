@@ -5,6 +5,7 @@ const buttons = document.querySelectorAll(".option");
 let pokemon_data = {};
 let past_ids = [];
 let user_stats = [0,0,0,0,0,0]
+const MAX_BST = 600;
 
 buttons.forEach(element => {
     element.addEventListener("click", e => {
@@ -128,6 +129,7 @@ function calculate_stats(e){
     }
     // get user's defense
 
+    if(user_stats.reduce((a, b) => a + b, 0) < MAX_BST){
     // if EASY, PROBABLY, 50/50
     if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
         // hp -> if pkmn_offense > user_hp, hp += (pkmn_offense[0] - user_stats[0]) * responseValues[selection]
@@ -167,8 +169,7 @@ function calculate_stats(e){
 
         // BST should be relative to 600
     }
-
-
+    }
 
 
 
