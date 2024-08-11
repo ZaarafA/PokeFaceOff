@@ -90,7 +90,7 @@ function calculate_stats(e){
     */
 
     let selection = e.target.innerHTML;
-    let bst = user_stats.reduce(add, 0);
+    let bst = user_stats.reduce((a, b) => a + b, 0);
 
     const responseValues = {
         "Easy": .5,
@@ -129,7 +129,7 @@ function calculate_stats(e){
     }
     // get user's defense
 
-    if(user_stats.reduce((a, b) => a + b, 0) < MAX_BST){
+    if(bst < MAX_BST){
     // if EASY, PROBABLY, 50/50
     if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
         // hp -> if pkmn_offense > user_hp, hp += (pkmn_offense[0] - user_stats[0]) * responseValues[selection]
