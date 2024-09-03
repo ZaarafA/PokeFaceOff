@@ -4,7 +4,7 @@ const buttons = document.querySelectorAll(".option");
 // Global
 let pokemon_data = {};
 let past_ids = [];
-let user_stats = [0,0,0,0,0,0]
+let user_stats = [80,80,80,80,80,0]
 const MAX_BST = 600;
 
 buttons.forEach(element => {
@@ -128,47 +128,58 @@ function calculate_stats(e){
         user_offense = [user_stats[3], "Sp. Atk"]
     }
     // get user's defense
+    let user_defense = [0,"stat"];
+    if(user_stats[2] > user_stats[4]){
+        user_defense = [user_stats[2], "Defense"]
+    } else{
+        user_defense = [user_stats[4], "Sp. Def"]
+    }
 
     if(bst < MAX_BST){
     // if EASY, PROBABLY, 50/50
-    if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
-        // hp -> if pkmn_offense > user_hp, hp += (pkmn_offense[0] - user_stats[0]) * responseValues[selection]
-        if(pkmn_offense[0] > user_stats[0]){
-            user_stats[0] += (pkmn_offense[0] - user_stats[0]) * responseValues[selection];
-            user_stats[0] = Math.round(user_stats[0]);
+        if((selection == "Easy") || (selection == "Probably") || (selection == "50/50")){
+            // hp -> if pkmn_offense > user_hp, hp += (pkmn_offense[0] - user_stats[0]) * responseValues[selection]
+            if(pkmn_offense[0] > user_stats[0]){
+                user_stats[0] += (pkmn_offense[0] - user_stats[0]) * responseValues[selection];
+                user_stats[0] = Math.round(user_stats[0]);
+            }
+
+            // pokemon offense raises that user's defense
+            if((pkmn_offense[1] == "Attack") && (pkmn_offense[0] > user_stats[2])){
+                user_stats[2] += (pkmn_offense[0] - user_stats[2]) * responseValues[selection]
+                user_stats[2] = Math.round(user_stats[2]);
+            } else if((pkmn_offense[1] == "Sp. Atk") && (pkmn_offense[0] > user_stats[4])){
+                user_stats[4] += (pkmn_offense[0] - user_stats[4]) * responseValues[selection];
+                user_stats[4] = Math.round(user_stats[4]);
+            }
+
+            if((pkmn_defense[1] == "Defense") && (pkmn_defense[0] > user_stats[1])){
+                user_stats[1] += (pokemon_data.stats[2].base_stat - user_stats[1]) * responseValues[selection]
+                user_stats[1] = Math.round(user_stats[1]);
+            } else if((pkmn_defense[1] == "Sp. Def") && (pkmn_defense[0] > user_stats[3])){
+                user_stats[3] += (pokemon_data.stats[4].base_stat - user_stats[3]) * responseValues[selection]
+                user_stats[3] = Math.round(user_stats[3]);
+            }
+
+            // BST should be relative to 600
         }
+        if((selection == "Nope") || (selection == "im dead")){
+            // pkmn offense lowers u hp
+            if(pkmn_offense[0] < user_stats[0]){
+                user_stats[0] += (user_stats[0] - pkmn_offense[0]) * responseValues[selection];
+                user_stats[0] = Math.round(user_stats[0]);
+            }
+            // pkmn offense lowers that u defense
+            if((pkmn_offense[1] == "Attack") && (pkmn_offense[0] < user_stats[2])){
+                user_stats[2] += (user_stats[2] - pkmn_offense[0]) * responseValues[selection]
+                user_stats[2] = Math.round(user_stats[2]);
+            } else if((pkmn_offense[1] == "Sp. Atk") && (pkmn_offense[0] < user_stats[4])){
+                user_stats[4] += (user_stats[4] - pkmn_offense[0]) * responseValues[selection]
+                user_stats[4] = Math.round(user_stats[4]);
+            }
 
-        // pokemon offense raises that user's defense
-        if((pkmn_offense[1] == "Attack") && (pkmn_offense[0] > user_stats[2])){
-            user_stats[2] += (pkmn_offense[0] - user_stats[2]) * responseValues[selection]
-            user_stats[2] = Math.round(user_stats[2]);
-        } else if((pkmn_offense[1] == "Sp. Atk") && (pkmn_offense[0] > user_stats[4])){
-            user_stats[4] += (pkmn_offense[0] - user_stats[4]) * responseValues[selection];
-            user_stats[4] = Math.round(user_stats[4]);
+            // pkmn defense lowers that u offense
         }
-
-        // pokemon defense raises that offense
-        // PROBLEM: It will only every raise one attack stat
-        // if((user_offense[1] == "Attack") && (pokemon_data.stats[2].base_stat > user_offense[0])){
-        //     // raise user attack
-        //     user_stats[1] += (pokemon_data.stats[2].base_stat - user_stats[1]) * responseValues[selection]
-        //     user_stats[1] = Math.round(user_stats[1]);
-        // } else if((user_offense[1] == "Sp. Atk") && (pokemon_data.stats[4].base_stat > user_offense[0])){
-        //     // raise user sp. atk
-        //     user_stats[3] += (pokemon_data.stats[4].base_stat - user_stats[1]) * responseValues[selection]
-        //     user_stats[3] = Math.round(user_stats[3]);
-        // }
-
-        if((pkmn_defense[1] == "Defense") && (pkmn_defense[0] > user_stats[1])){
-            user_stats[1] += (pokemon_data.stats[2].base_stat - user_stats[1]) * responseValues[selection]
-            user_stats[1] = Math.round(user_stats[1]);
-        } else if((pkmn_defense[1] == "Sp. Def") && (pkmn_defense[0] > user_stats[3])){
-            user_stats[3] += (pokemon_data.stats[4].base_stat - user_stats[3]) * responseValues[selection]
-            user_stats[3] = Math.round(user_stats[3]);
-        }
-
-        // BST should be relative to 600
-    }
     }
 
 
