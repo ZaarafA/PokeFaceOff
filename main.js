@@ -29,8 +29,14 @@ async function resetPokemon(){
         Change the numbers in the stats
     */
 
-    // Generate a random number
-    let rand_id = Math.floor(Math.random() * 1025) + 1;
+   // Generate a random Pokemon ID, excluding previous
+    let rand_id = null;
+    while(true){
+        rand_id = Math.floor(Math.random() * 1025) + 1;
+        if(!past_ids.includes(rand_id)){
+            break
+        }
+    }
     
     // Fetch Pokemon data
     await fetchPokemonData(rand_id);
@@ -188,8 +194,6 @@ function calculate_stats(e){
             }
         }
     }
-
-
 
     updateStats();
 }
