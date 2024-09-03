@@ -1,7 +1,7 @@
 // DOM MANIPULATIONS
 const buttons = document.querySelectorAll(".option");
 
-// Global
+// Global Variables
 let pokemon_data = {};
 let past_ids = [];
 let user_stats = [0,0,0,0,0,70]
@@ -21,17 +21,12 @@ async function buttonClick(e){
 resetPokemon();
 
 async function resetPokemon(){
-    /*
-        Load it into pokemon_data
-
-        Replace Sprite
-        Change the Name in the title
-        Change the numbers in the stats
-    */
-
    // Generate a random Pokemon ID, excluding previous
     let rand_id = null;
     while(true){
+        if(past_ids.length > 1024 ){
+            break;
+        }
         rand_id = Math.floor(Math.random() * 1025) + 1;
         if(!past_ids.includes(rand_id)){
             break
@@ -83,17 +78,6 @@ async function fetchPokemonData(id) {
 
 function calculate_stats(e){
     // recalculate User Stats based on pokemon match up
-
-    /*
-    If you would beat a pokemon:
-    Its lowest defense increases your corresponding attack
-    The increase is the difference between your stats
-    only if greater than yours
-    Easy = the full difference
-    Probably = half diff
-    50/50 => 1/4 diff
-    subtract otherwise  
-    */
 
     let selection = e.target.innerHTML;
     let bst = user_stats.reduce((a, b) => a + b, 0);
