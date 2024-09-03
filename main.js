@@ -4,7 +4,7 @@ const buttons = document.querySelectorAll(".option");
 // Global
 let pokemon_data = {};
 let past_ids = [];
-let user_stats = [80,80,80,80,80,0]
+let user_stats = [0,0,0,0,0,70]
 const MAX_BST = 600;
 
 buttons.forEach(element => {
@@ -179,6 +179,13 @@ function calculate_stats(e){
             }
 
             // pkmn defense lowers that u offense
+            if((pkmn_defense[1] == "Defense") && (user_stats[1] > pkmn_defense[0])){
+                user_stats[1] += (user_stats[1] - pkmn_defense[0]) * responseValues[selection]
+                user_stats[1] = Math.round(user_stats[1]);
+            } else if((pkmn_defense[1] == "Sp. Def") && (user_stats[3] > pkmn_defense[0])){
+                user_stats[3] += (user_stats[3] - pkmn_defense[0]) * responseValues[selection]
+                user_stats[3] = Math.round(user_stats[3]);
+            }
         }
     }
 
